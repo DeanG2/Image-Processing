@@ -1,0 +1,17 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "main": "unzip.js",
+  "dependencies": {
+    "pngjs": "^3.4.0",
+    "unzipper": "^0.10.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest --env node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
