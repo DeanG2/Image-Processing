@@ -8,10 +8,12 @@
  * 
  */
 
-const unzipper = require('unzipper'),
-  fs = require("fs"),
-  PNG = require('pngjs').PNG,
-  path = require('path');
+const unzipper = require('unzipper')
+const fs = require("fs").promises
+const { createReadStream, createWriteStream } = require("fs");
+const { resolve } = require('path');
+PNG = require('pngjs').PNG,
+path = require('path');
 
 
 /**
@@ -22,7 +24,15 @@ const unzipper = require('unzipper'),
  * @return {promise}
  */
 const unzip = (pathIn, pathOut) => {
-
+  fs.createReadStream(pathIn)
+  .pipe(unzipper.Extract(pathOut))
+  .promise()
+  .then(function() {
+      console.log('Extraction operation complete!');
+    })
+  .catch(function() {
+    console.log('Failed to create directory.');
+  })
 };
 
 /**
@@ -32,6 +42,21 @@ const unzip = (pathIn, pathOut) => {
  * @return {promise}
  */
 const readDir = dir => {
+  return new promise((resolve, reject) => {
+    pngFiles = []
+    fs.readdir(dir, (err, files) => {
+      if (err) {
+        reject(err)
+      } else {
+        files.forEach(file => {
+          if (path.extname(file) == ".png") {
+            pngFiles.push(file)
+          }
+        })
+        resolve(pngFiles)
+      }
+    })
+  })
 
 };
 
